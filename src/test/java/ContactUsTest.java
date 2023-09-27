@@ -70,8 +70,27 @@ public class ContactUsTest {
         assertThat(redAlertBox.isDisplayed()).isTrue(); // sprawdzu czy element jest wyświetlony
     }
 
-    public void ShouldNotAllowToSendContactUsFormWithEmailOnly(){
-hhhhhhh
+
+    @Test
+    public void shouldNotAllowToSendContactUsFormWithEmailOnly(){
+
+        driver.get("http://www.automationpractice.pl/index.php");
+        WebElement contactUsLink = driver.findElement(By.cssSelector("#contact-link"));// //*[@id='contact-link']
+        contactUsLink.click();
+
+        WebElement emailInput = driver.findElement(By.id("email"));//#email, //*[@id='email']
+        emailInput.sendKeys("test@test.com");
+
+        WebElement sendButton = driver.findElement(By.cssSelector("#submitMessage"));// //*[@id='submitMessage']
+        sendButton.click();
+
+        WebElement redAlertBox = driver.findElement(By.className("alert-danger")); // //*[@class='alert alert-danger']
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10), Duration.ofMillis(250));
+        wait.until(ExpectedConditions.visibilityOf(redAlertBox));
+
+        assertThat(redAlertBox.isDisplayed()).isTrue(); // sprawdzu czy element jest wyświetlony
+
     }
 
 
