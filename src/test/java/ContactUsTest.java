@@ -1,5 +1,4 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,20 +7,19 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ContactUsTest {
     private WebDriver driver; //komunikacja z przeglądarką
 
     //    odpali sie przed wszystkimi testami
     @BeforeAll
-    public static void setupClass(){
+    public static void setupClass() {
         WebDriverManager.chromedriver().setup();
     }
 
@@ -34,13 +32,13 @@ public class ContactUsTest {
     // po każdym teście
     @AfterEach
     void tearDown() {
-        if(driver != null){
+        if (driver != null) {
             driver.quit();
         }
     }
 
     @Test
-    public void shouldNotAllowToSendEmptyContactUsForm(){
+    public void shouldNotAllowToSendEmptyContactUsForm() {
 
 //        implicity wait - wait globalnym dla wszyskich elemenrów, nie polecam, działa tylko dla metod find element
 
@@ -72,7 +70,7 @@ public class ContactUsTest {
 
 
     @Test
-    public void shouldNotAllowToSendContactUsFormWithEmailOnly(){
+    public void shouldNotAllowToSendContactUsFormWithEmailOnly() {
 
         driver.get("http://www.automationpractice.pl/index.php");
         WebElement contactUsLink = driver.findElement(By.cssSelector("#contact-link"));// //*[@id='contact-link']
