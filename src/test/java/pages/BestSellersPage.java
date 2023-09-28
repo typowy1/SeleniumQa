@@ -36,4 +36,8 @@ public class BestSellersPage extends BasePage {
         bestsellersButton.click();
     }
 
+    public String getProductNameByIndex(int index) {
+        return getProductNames().get(index);
+    }
+
 }

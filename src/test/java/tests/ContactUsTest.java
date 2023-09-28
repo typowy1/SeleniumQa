@@ -5,7 +5,7 @@ import model.Message;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.ContactUsFormPage;
-import pages.TopMenuPage;
+import pages.NavMenuPage;
 import utils.PageTitleUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class) // testy będa odpalane w jakiejs kolejności
 public class ContactUsTest extends BaseTest {
 
-    private TopMenuPage topMenuPage;
+    private NavMenuPage navMenuPage;
     private ContactUsFormPage contactUsFormPage;
 
     // przed każdym testem
@@ -23,7 +23,7 @@ public class ContactUsTest extends BaseTest {
         driver.get(BASE_URL);
         assertThat(driver.getTitle()).isEqualTo(PageTitleUtils.HOME_PAGE_TITLE);
 
-        topMenuPage = new TopMenuPage(driver);
+        navMenuPage = new NavMenuPage(driver);
         contactUsFormPage = new ContactUsFormPage(driver);
     }
 
@@ -43,7 +43,7 @@ public class ContactUsTest extends BaseTest {
 
 //        Fluent wait - rozszeżenie explicity waita
 
-        topMenuPage.clickOnContactUsLink();
+        navMenuPage.clickOnContactUsLink();
         contactUsFormPage.clickOnSendButton();
 
         assertThat(contactUsFormPage.isRedAlertBoxDisplayed()).isTrue(); // sprawdzu czy element jest wyświetlony
@@ -53,7 +53,7 @@ public class ContactUsTest extends BaseTest {
     @Test
     @Order(2)
     public void shouldNotAllowToSendContactUsFormWithEmailOnly() {
-        topMenuPage.clickOnContactUsLink();
+        navMenuPage.clickOnContactUsLink();
         contactUsFormPage.enterEmail("test@test.pl");
         contactUsFormPage.clickOnSendButton();
 
@@ -63,7 +63,7 @@ public class ContactUsTest extends BaseTest {
     @Test
     @Order(3)
     public void shouldSendContactUsFormWithValidData(){
-        topMenuPage.clickOnContactUsLink();
+        navMenuPage.clickOnContactUsLink();
 
         Message message = new Message();
         message.setSubject(MessageSubject.WEBMASTER);

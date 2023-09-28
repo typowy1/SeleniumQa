@@ -8,15 +8,14 @@ import org.openqa.selenium.support.PageFactory;
 public class TopMenuPage extends BasePage {
 
     public TopMenuPage(WebDriver driver) {
-        super(driver); //odwołujemy się do konstruktora z klasy matki
+        super(driver);
         PageFactory.initElements(driver, this);
     }
 
+    @FindBy(css = "a[title='Women']")
+    WebElement womenLink;
 
-    @FindBy(css = "#contact-link")
-    WebElement contactUsLink;
-
-    public void clickOnContactUsLink() {
-        contactUsLink.click();
+    public void clickOnWomenLink() {
+        womenLink.click();
     }
 }
