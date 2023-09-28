@@ -1,5 +1,6 @@
 package pages;
 
+import model.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -96,17 +97,30 @@ public class CreateAnAccountPage extends BasePage {
         select.selectByVisibleText(months);
     }
 
-    public void selectYearsSelect(String years) {
+    public void selectYears(String years) {
         Select select = new Select(yearsSelect);
         select.selectByVisibleText(years);
     }
 
-    public void checkNewsletterCheckbox() {
-        newsletterCheckbox.click();
+    public void checkNewsletterCheckbox(String state) {
+        if(state.equals("ON")){
+            newsletterCheckbox.click();
+        }
     }
 
     public void clickOnSubmitAccountButton(){
         submitAccountButton.click();
     }
 
+    public void createAccount(User user){
+        checkRadioFromTitle(user.getTitle().getValue());
+        typeInFirstNameInput(user.getFirstName());
+        typeInLastNameInput(user.getLastName());
+        typeInPasswordInput(user.getPassword());
+        selectDays(user.getDays());
+        selectMonths(user.getMonths());
+        selectYears(user.getYears());
+        checkNewsletterCheckbox(user.getNewsletterCheckbox());
+        clickOnSubmitAccountButton();
+    }
 }

@@ -1,16 +1,15 @@
 package tests;
 
+import enums.MessageSubject;
+import enums.Title;
+import model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.Select;
 import pages.*;
 import utils.PageTitleUtils;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -39,15 +38,18 @@ public class CreateAnAccountPageTest extends BaseTest {
         navMenuPage.clickOnSignIn();
         signInPage.typeRandomEmailInEmailAddressInput();
         signInPage.clickOnCreateAnAccountButton();
-        createAnAccountPage.checkRadioFromTitle("Mr");
-        createAnAccountPage.typeInFirstNameInput("Tomek");
-        createAnAccountPage.typeInLastNameInput("Kowalski");
-        createAnAccountPage.typeInPasswordInput("KLKLoo");
-        createAnAccountPage.selectDays("15  ");
-        createAnAccountPage.selectMonths("June ");
-        createAnAccountPage.selectYearsSelect("1999  ");
-        createAnAccountPage.checkNewsletterCheckbox();
-        createAnAccountPage.clickOnSubmitAccountButton();
+
+        User user = new User();
+        user.setTitle(Title.MR);
+        user.setFirstName("Tomek");
+        user.setLastName("Kowalski");
+        user.setPassword("KLKLoo");
+        user.setDays("15  ");
+        user.setMonths("June ");
+        user.setYears("1999  ");
+        user.setNewsletterCheckbox("ON");
+
+        createAnAccountPage.createAccount(user);
         String textFromSignOutLink = homePage.getTextFromSignOutLink();
         System.out.println(textFromSignOutLink);
         assertThat(textFromSignOutLink).isEqualTo("Sign out");
